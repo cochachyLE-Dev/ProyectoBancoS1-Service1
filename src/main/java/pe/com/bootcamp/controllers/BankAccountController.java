@@ -21,6 +21,10 @@ public class BankAccountController {
 	   return new UnitResult<String>(false,"Welcome Hystrix");
 	}
 	public UnitResult<String> fallback_hello() {
-	   return new UnitResult<String>(true,"Request fails. It takes long time to response");
+		int code = 1002;
+		String[] causes = new String[1];
+		causes[0] = "Timeout expired";
+		
+		return new UnitResult<String>(true,"Request fails. It takes long time to response", code, causes) {};
 	}
 }
