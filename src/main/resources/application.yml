@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Service1
+  cloud:
+    config:
+      password: password.
+      username: user
+  config:
+    import: configserver:http://localhost:8888  
