@@ -6,4 +6,14 @@ spring:
       password: password.
       username: user
   config:
-    import: configserver:http://localhost:8888  
+    import: configserver:http://localhost:8888
+vaetech:
+  load-balancer:
+    instance1:
+      protocol: http
+      hostname: localhost
+      ports: [61940, 61941, 61942]
+    instance2:
+      protocol: http
+      hostname: localhost
+      ports: [59307]
