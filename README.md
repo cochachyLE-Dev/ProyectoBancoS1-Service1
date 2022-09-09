@@ -18,7 +18,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 ```
 
-Configuración personalizada del Balanceador de carga
+Configuración personalizada del Balanceador de carga [application.yml]
 ```yaml
 vaetech:
   load-balancer:
