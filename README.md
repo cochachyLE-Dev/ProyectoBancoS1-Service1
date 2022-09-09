@@ -46,7 +46,7 @@ class ServiceInstance1ListSupplier{
 	
 	@Autowired
     @Lazy
-    private EurekaClient eurekaClient;
+    EurekaClient eurekaClient;
 	
 	@Bean
 	@Primary	
