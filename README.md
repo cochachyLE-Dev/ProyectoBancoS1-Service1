@@ -32,10 +32,6 @@ vaetech:
       #ports: [59307] # Los puertos lo obtiene de EurekaClient
 ```
 
-![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-Instances.PNG)
-
-![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-EurekaClient.PNG)
-
 Configuración personalizada del Balanceador de carga
 
 ```java
@@ -71,3 +67,10 @@ class ServiceInstance1ListSupplier{
 	}
 }
 ```
+
+Controlador de instancias para EurekaClient. La idea es mostrar las instancias en el 
+ [ProyectoBancoS1-AdminServer](https://github.com/cochachyLE-Dev/ProyectoBancoS1-AdminServer)
+
+![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-Instances.PNG)
+
+![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-EurekaClient.PNG)
