@@ -12,7 +12,7 @@ vaetech:
     instance1:
       protocol: http
       hostname: localhost
-      ports: [61940, 61941, 61942]
+      ports: [58579, 61940, 61941, 61942]
     instance2:
       protocol: http
       hostname: localhost
