@@ -29,3 +29,8 @@ vaetech:
       hostname: localhost
       #ports: [59307] # Los puertos lo obtiene de EurekaClient
 ```
+
+![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-Instances.PNG)
+
+![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-EurekaClient.PNG)
+
