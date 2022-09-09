@@ -36,3 +36,38 @@ vaetech:
 
 ![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-EurekaClient.PNG)
 
+Configuración personalizada del Balanceador de carga
+
+```java
+class ServiceInstance1ListSupplier{
+	
+	@Autowired
+	LoadBalancerInstance1Config config;
+	
+	@Autowired
+    @Lazy
+    private EurekaClient eurekaClient;
+	
+	@Bean
+	@Primary	
+	ServiceInstanceListSupplier serviceInstanceListSupplier() throws Exception {
+		List<InstanceInfo> instances = eurekaClient.getApplications()
+				.getRegisteredApplications(WebClientInstance1Config.InstanceName)
+				.getInstances();
+		
+		if(instances == null || instances.size() == 0)
+			throw new Exception("instances not found.");
+		
+		Integer[] ports = eurekaClient.getApplications()
+				.getRegisteredApplications(WebClientInstance1Config.InstanceName)
+				.getInstances().stream()
+				.filter(e -> e.getStatus().equals(InstanceStatus.UP))
+				.map(e -> e.getPort()).toArray(Integer[]::new);
+		
+		if(ports.length == 0)
+			throw new Exception("no available instances found.");
+		
+		return new MicroServiceInstanceListSupplier(WebClientInstance1Config.InstanceName, config.getHostname(), ports);
+	}
+}
+```
