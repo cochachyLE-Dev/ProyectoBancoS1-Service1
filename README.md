@@ -73,3 +73,5 @@ Controlador de instancias para EurekaClient. La idea es mostrar las instancias d
 ![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-Instances.PNG)
 
 ![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-EurekaClient.PNG)
+
+![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-AdminServer.PNG)
