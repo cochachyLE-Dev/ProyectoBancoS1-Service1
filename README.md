@@ -40,7 +40,7 @@ class ServiceInstance1ListSupplier{
 	@Autowired
 	LoadBalancerInstance1Config config;
 	
-	@Autowired
+    @Autowired
     @Lazy
     EurekaClient eurekaClient;
 	
@@ -68,8 +68,7 @@ class ServiceInstance1ListSupplier{
 }
 ```
 
-Controlador de instancias para EurekaClient. La idea es mostrar las instancias en el Service-Discovery
- [ProyectoBancoS1-AdminServer](https://github.com/cochachyLE-Dev/ProyectoBancoS1-AdminServer)
+Controlador de instancias para EurekaClient. La idea es mostrar las instancias de Service-Discovery en el Admin-Server [ProyectoBancoS1-AdminServer](https://github.com/cochachyLE-Dev/ProyectoBancoS1-AdminServer)
 
 ![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-Instances.PNG)
 
