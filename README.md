@@ -9,6 +9,7 @@
 
 No se registra el servicio "Service1" en Eureka, es innecesario. Se usa EurekaClient para acceder a las instancias del servicio para luego usarlas en el Balanceador de carga.
 
+Configuración basica de EurekaClient
 ```yaml
 eureka:   
   client:    
@@ -17,6 +18,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 ```
 
+Configuración personalizada del Balanceador de carga
 ```yaml
 vaetech:
   load-balancer:
