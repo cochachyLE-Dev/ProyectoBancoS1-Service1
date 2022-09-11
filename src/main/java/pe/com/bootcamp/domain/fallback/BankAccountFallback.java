@@ -8,53 +8,53 @@ import reactor.core.publisher.Mono;
 
 public class BankAccountFallback {
 	
-	Mono<UnitResult<BankAccount>> fallback_create(BankAccount entity){
+	public Mono<UnitResult<BankAccount>> fallback_create(BankAccount entity, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_update(BankAccount entity){
+	public Mono<UnitResult<BankAccount>> fallback_update(BankAccount entity, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_saveAll(Flux<BankAccount> entities){
+	public Mono<UnitResult<BankAccount>> fallback_saveAll(Flux<BankAccount> entities, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_findById(String id){
+	public Mono<UnitResult<BankAccount>> fallback_findById(String id, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_findByClientIdentNum(String dni){
+	public Mono<UnitResult<BankAccount>> fallback_findByClientIdentNum(String dni, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_findByAccountNumber(String accountNumber){
+	public Mono<UnitResult<BankAccount>> fallback_findByAccountNumber(String accountNumber, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
 	}
 	
-	Mono<UnitResult<BankAccount>> fallback_findAll(){
+	public Mono<UnitResult<BankAccount>> fallback_findAll(Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
-		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			
+		return Mono.just(new UnitResult<BankAccount>(true, throwable.getMessage(), code, causes));			
 	}
 	
-	Flux<BankAccount> fallback_findAllStreaming() throws Exception{
+	public Flux<BankAccount> fallback_findAllStreaming(Throwable throwable) throws Exception{
 		throw new Exception("Timeout expired");			
 	}
 	
-	Mono<ResultBase> fallback_deleteById(String id){
+	public Mono<ResultBase> fallback_deleteById(String id, Throwable throwable){
 		int code = 1002;
 		String[] causes = new String[] { "Timeout expired" };				
 		return Mono.just(new UnitResult<BankAccount>(true,"Request fails. It takes long time to response", code, causes));			

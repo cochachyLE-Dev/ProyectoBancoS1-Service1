@@ -38,6 +38,7 @@ public class InstanceController {
 							.id(e.getInstanceId())
 							.name(e.getAppName())
 							.pageUrl(e.getHomePageUrl())
+							.hostname(e.getHostName())
 							.ipAddress(e.getIPAddr())
 							.port(e.getPort())
 							.Status(e.getStatus().toString())

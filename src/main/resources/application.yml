@@ -10,10 +10,6 @@ spring:
 vaetech:
   load-balancer:
     instance1:
-      protocol: http
-      hostname: localhost
-      #ports: [58579, 61940, 61941, 61942] # Los puertos lo obtiene de EurekaClient
+      enabledSSL: false
     instance2:
-      protocol: http
-      hostname: localhost
-      #ports: [59307] # Los puertos lo obtiene de EurekaClient
+      enabledSSL: false

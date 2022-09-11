@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
+import org.javatuples.Triplet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -50,35 +51,34 @@ class ServiceInstance2ListSupplier{
 	@Bean
 	@Primary	
 	ServiceInstanceListSupplier serviceInstanceListSupplier() throws Exception {
-		List<InstanceInfo> instances = eurekaClient.getApplications()
+		List<InstanceInfo> instanceInfoList = eurekaClient.getApplications()
 				.getRegisteredApplications(WebClientInstance2Config.InstanceName)
 				.getInstances();
 		
-		if(instances == null || instances.size() == 0)
+		if(instanceInfoList == null || instanceInfoList.size() == 0)
 			throw new Exception("instances not found.");
 		
-		Integer[] ports = eurekaClient.getApplications()
+		Boolean isSecure = config.getEnabledSSL();
+		List<Triplet<String, Integer, Boolean>> instances = eurekaClient.getApplications()
 				.getRegisteredApplications(WebClientInstance2Config.InstanceName)
 				.getInstances().stream()
 				.filter(e -> e.getStatus().equals(InstanceStatus.UP))
-				.map(e -> e.getPort()).toArray(Integer[]::new);
+				.map(e -> new Triplet<String, Integer, Boolean>(e.getIPAddr(), e.getPort(), isSecure)).toList();
 		
-		if(ports.length == 0)
+		if(instances.size() == 0)
 			throw new Exception("no available instances found.");
 		
-		return new MicroServiceInstanceListSupplier(WebClientInstance2Config.InstanceName, config.getHostname(), ports);
+		return new MicroServiceInstanceListSupplier(WebClientInstance2Config.InstanceName, instances);
 	}
 }
 @Configuration
 @ConfigurationProperties(prefix = "vaetech.load-balancer.instance2")
 @Data
 class LoadBalancerInstance2Config {	
-	private String protocol;
-	private String hostname;	
-	private Integer[] ports;
-		
+	private Boolean enabledSSL = false;	
+	
 	public final String getBaseUrl(String instanceName, String controllerName) {
-		protocol = protocol == null ? "http": protocol;
+		final String protocol = enabledSSL ? "https": "http";
 		return  protocol + "://" + instanceName + "/" + controllerName;
 	}
 }

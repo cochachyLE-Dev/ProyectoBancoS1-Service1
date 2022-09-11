@@ -9,6 +9,7 @@ public class Instance {
 	private String id;
 	private String name;
 	private String pageUrl;
+	private String hostname;
 	private String ipAddress;
 	private int port;
 	private String Status;

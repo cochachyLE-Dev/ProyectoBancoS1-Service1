@@ -20,6 +20,7 @@ import com.netflix.appinfo.InstanceInfo.InstanceStatus;
 import com.netflix.discovery.EurekaClient;
 
 import lombok.Data;
+import org.javatuples.Triplet;
 
 @Configuration
 @LoadBalancerClient(name = WebClientInstance1Config.InstanceName, configuration = ServiceInstance1ListSupplier.class)
@@ -60,41 +61,40 @@ class ServiceInstance1ListSupplier{
 	
 	@Autowired
     @Lazy
-    private EurekaClient eurekaClient;
+    EurekaClient eurekaClient;
 	
 	@Bean
 	@Primary	
 	ServiceInstanceListSupplier serviceInstanceListSupplier() throws Exception {
-		List<InstanceInfo> instances = eurekaClient.getApplications()
+		List<InstanceInfo> instanceInfoList = eurekaClient.getApplications()
 				.getRegisteredApplications(WebClientInstance1Config.InstanceName)
 				.getInstances();
 		
-		if(instances == null || instances.size() == 0)
+		if(instanceInfoList == null || instanceInfoList.size() == 0)
 			throw new Exception("instances not found.");
 		
-		Integer[] ports = eurekaClient.getApplications()
+		Boolean isSecure = config.getEnabledSSL();
+		List<Triplet<String, Integer, Boolean>> instances = eurekaClient.getApplications()
 				.getRegisteredApplications(WebClientInstance1Config.InstanceName)
 				.getInstances().stream()
 				.filter(e -> e.getStatus().equals(InstanceStatus.UP))
-				.map(e -> e.getPort()).toArray(Integer[]::new);
+				.map(e -> new Triplet<String, Integer, Boolean>(e.getIPAddr(), e.getPort(), isSecure)).toList();
 		
-		if(ports.length == 0)
+		if(instances.size() == 0)
 			throw new Exception("no available instances found.");
 		
-		return new MicroServiceInstanceListSupplier(WebClientInstance1Config.InstanceName, config.getHostname(), ports);
+		return new MicroServiceInstanceListSupplier(WebClientInstance1Config.InstanceName, instances);
 	}
 }
 
 @Configuration
 @ConfigurationProperties(prefix = "vaetech.load-balancer.instance1")
 @Data
-class LoadBalancerInstance1Config {	
-	private String protocol;
-	private String hostname;	
-	private Integer[] ports;
+class LoadBalancerInstance1Config {
+	private Boolean enabledSSL = false;	
 		
 	public final String getBaseUrl(String instanceName, String controllerName) {
-		protocol = protocol == null ? "http": protocol;
+		final String protocol = enabledSSL ? "https": "http";
 		return  protocol + "://" + instanceName + "/" + controllerName;
 	}
 }
