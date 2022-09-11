@@ -30,8 +30,9 @@ vaetech:
       enabledSSL: false    # Especificar True cuando las instancias tienen un enlace seguro.
 ```
 
-Configuration personalizada de Balanceador de carga para microservicio1, microservicio2, ...
+Configuration personalizada de Balanceador de carga para microservicio1, microservicio2, ....</br>
 Se considera el despliegue de los microservicios en multiples servidores.
+
 ![img](https://github.com/cochachyLE-Dev/ProyectoBancoS1-Service1/blob/main/Service1-LoadBalancer-Microservice1.PNG)
 
 Configuración personalizada del Balanceador de carga.
