@@ -7,9 +7,3 @@ spring:
       username: user
   config:
     import: configserver:http://localhost:8888
-vaetech:
-  load-balancer:
-    instance1:
-      enabledSSL: false
-    instance2:
-      enabledSSL: false
